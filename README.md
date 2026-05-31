@@ -1,6 +1,6 @@
 # SBFRec
 
-Sequential recommendation model with dual-branch (sequence + LLM-semantic) encoders, RG-LRU / Mamba / Transformer backbones, FFT-based frequency mixing, and a principled MoE router.
+This is code for SBFRec: Semantic-Behavioral Fusion with Trajectory Smoothing for Generative Sequential Recommendation.
 
 ## Project layout
 
@@ -26,25 +26,13 @@ pip install -r requirements.txt
 
 ## Data layout
 
-The trainer expects a pickle at:
+The trainer expects a pickle at `datasets/data/<DATASET>/dataset.pkl` with keys `train`, `val`, `test`, `smap` (leave-one-out split). For LLM encoders, also drop `llm_embeddings_qwen.npy` (or `llm_embeddings.npy`) alongside it.
 
-```
-datasets/data/<DATASET>/dataset.pkl
-```
-
-with keys `train`, `val`, `test`, `smap` (Bert4Rec-style sequential split). For LLM encoders, also place embeddings alongside it:
-
-```
-datasets/data/<DATASET>/llm_embeddings_qwen.npy   # or llm_embeddings.npy
-```
-
-Generate them with:
-
-```bash
-python generate_embeddings.py --dataset amazon_beauty --model qwen-7b
-```
+Full schema, 5-core preprocessing recipe, and embedding generation instructions: [datasets/README.md](datasets/README.md).
 
 ## Quick start
+
+See [run_example.sh](run_example.sh) for a copy-paste-ready set of 8 common commands (baseline, LLM embedding generation, full method, ranking loss, fine-tune, eval-only, CPU smoke test).
 
 Train the default RG-LRU + Local-FFT + LLM encoder on Amazon Beauty:
 
