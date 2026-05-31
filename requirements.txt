@@ -1,0 +1,17 @@
+# Core deep learning
+torch>=2.0.0
+numpy>=1.23.0
+
+# Progress bar / utilities
+tqdm>=4.65.0
+
+# Optional: LLM text embedding generation (generate_embeddings.py)
+# Pick whichever embedding family you need.
+sentence-transformers>=2.2.2
+transformers>=4.40.0
+
+# Optional: real Mamba kernel for `--encoder_type mamba*` variants.
+# Falls back to LSTM automatically if not installed.
+# Requires CUDA + matching toolchain; comment out on CPU-only / macOS.
+# mamba-ssm>=1.2.0
+# causal-conv1d>=1.2.0
